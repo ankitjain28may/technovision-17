@@ -41,9 +41,21 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+        // 'api' => [
+        //     'driver' => 'token',
+        //     'provider' => 'users',
+        // ],
+
+        // User-defined guards
+
+        'patient' => [
+            'driver' => 'session',
+            'provider' => 'patients',
+        ],
+
+        'doctor' => [
+            'driver' => 'session',
+            'provider' => 'doctors',
         ],
     ],
 
@@ -65,15 +77,20 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'patients' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Patient::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'doctors' => [
+            'driver' => 'eloquent',
+            'model' => App\Doctor::class,
+        ],
+
+        'users' => [
+            'driver' => 'database',
+            'table' => 'users',
+        ],
     ],
 
     /*
@@ -92,9 +109,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'patients' => [
+            'provider' => 'patients',
             'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'doctors' => [
+            'provider' => 'doctors',
+            'table' => 'forget',
             'expire' => 60,
         ],
     ],
